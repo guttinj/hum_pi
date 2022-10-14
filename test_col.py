@@ -43,5 +43,5 @@ final = [("Temperature", "Humidity", "Time and Date"),(temp_avg, hum_avg, x)]
 
 
 
-c = open('Jar' + n  + '.csv', 'a')
-o = csv.writer(c)
+Testing here
+Trying again
