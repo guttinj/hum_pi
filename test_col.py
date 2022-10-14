@@ -4,9 +4,8 @@ import csv
 #Average over 5 min for temp readings to file
 # Edit the text string for which text file to 
 # Using DHT11
-x = datetime.datetime.now()
-date = str(x)
-rec  = []
+cur_time = datetime.datetime.now()
+str_cur_time = str(cur_time)
 sen = Adafruit_DHT.DHT11
 pin_Num = 4
 
@@ -38,10 +37,11 @@ hum_rec = []
 hum_avg = sum(hum_rec)/len(hum_rec)
 
 
-final = [("Temperature", "Humidity", "Time and Date"),(temp_avg, hum_avg, x)]
+final = [("Temperature", "Humidity", "Time and Date"),(temp_avg, hum_avg, str_cur_time)]
+
+#prints out to csv file
+c = open('Jar' + n  + '.csv', 'a')
+o = csv.writer(c)
 
 
-
-
-Testing here
-Trying again
+# make functions that return values
