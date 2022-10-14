@@ -1,6 +1,8 @@
 import Adafruit_DHT
 import datetime
 import csv
+import threading
+import time
 #Average over 5 min for temp readings to file
 # Edit the text string for which text file to 
 # Using DHT11
@@ -45,3 +47,20 @@ o = csv.writer(c)
 
 
 # make functions that return values
+
+
+
+def sense_forever():
+    while True:
+        date = datetime.datetime.now()
+        print('reading sensor ' , date) 
+        time.sleep(5)
+
+sensor = threading.Thread(target=sense_forever)
+sensor.daemon = True
+sensor.start()
+
+while True:
+    date = datetime.datetime.now()
+    print('This part of the program is not blocked by the sensor ' , date)
+    time.sleep(1)
