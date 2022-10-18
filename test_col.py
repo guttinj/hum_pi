@@ -48,19 +48,51 @@ o = csv.writer(c)
 
 # make functions that return values
 
+import datetime
+import threading
+import time
+import csv
+##import Adafruit_DHT
 
+cur_time = datetime.datetime.now()
+str_cur_time = str(cur_time)
+##sen = Adafruit_DHT.DHT11
+pin_Num = 4
 
-def sense_forever():
+##input = input("Which Jar would you like to measure : ")
+humidity = []
+temp = []
+
+def sense_forever(humidity, temp):#get humidity and temperature values
     while True:
         date = datetime.datetime.now()
-        print('reading sensor ' , date) 
-        time.sleep(5)
+        ##humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
+        ##global humidity, temp
+        humidity += 5
+        temp += 12
 
-sensor = threading.Thread(target=sense_forever)
-sensor.daemon = True
-sensor.start()
+        ##print('reading sensor ' , date) 
+        #time.sleep(1)
+        #return(humidity, temp)
+        return(humidity, temp) 
+        #make data accessible for later function1
+        #print(humidity, temp)
 
-while True:
-    date = datetime.datetime.now()
-    print('This part of the program is not blocked by the sensor ' , date)
-    time.sleep(1)
+    #return(humidity, temp)
+sense_forever(humidity, temp)
+print(humidity)
+print(temp)
+
+##sensor = threading.Thread(target=sense_forever)
+##sensor.daemon = True
+##sensor.start()
+
+
+def format_lists():
+
+    while True:
+        date = datetime.datetime.now()
+        print('This part of the program is not blocked by the sensor ' , date)
+        time.sleep(1)
+
+
