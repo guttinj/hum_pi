@@ -48,17 +48,6 @@ o = csv.writer(c)
 
 # make functions that return values
 
-import datetime
-import threading
-import time
-import csv
-##import Adafruit_DHT
-
-cur_time = datetime.datetime.now()
-str_cur_time = str(cur_time)
-##sen = Adafruit_DHT.DHT11
-pin_Num = 4
-
 ##input = input("Which Jar would you like to measure : ")
 humidity = []
 temp = []
