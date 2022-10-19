@@ -5,44 +5,38 @@ import csv
 import time
 import os
 
-# cur_time = datetime.datetime.now()
-# str_cur_time = str(cur_time)
+
 # sen = Adafruit_DHT.DHT11
 # pin_Num = 4
 humidity = 0
 temp = 0
-date = 0
+
 
 n = input("Which Jar would you like to measure : ")
 
 def sense_forever(humidity, temp):#get humidity and temperature values
     count = 0
-    # lst = []
     hum_list = []
     temp_list = []
     while True:
         if count <= 4:
 
-            date = str(datetime.datetime.now())
 
-            ##humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
+            humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
             
             humidity += 5
             temp += 12
 
             ##print('reading sensor ' , date) 
             time.sleep(1)
-            #tempor = (("Temperature: "+ str(temp)), ("Humidity: "+ str(humidity)), ("Date and Time: " + date))
-            #lst.append(tempor)
+            
             hum_list.append(humidity)
             temp_list.append(temp)
             count = count + 1
-            #print(hum_list, temp_list)   
         else:
             break
     return(hum_list, temp_list)
-        # print(lst, count, len(lst))
-        #make data accessible for later function1
+        
 
 hum_list, temp_list = sense_forever(humidity, temp)
 
@@ -65,7 +59,7 @@ def export_csv(n, hum_avg, temp_avg, cur_time):
         open_file.writerow(final_data)
         print("File write complete")
     else:
-        create_file = input("Selected file does not currently exist. Would you like to create new file Jar" + n + ".csv?: Y or N")
+        create_file = input("Selected file does not currently exist. Would you like to create new file Jar" + n + ".csv?: Y or N ")
         
         if create_file == "Y" or create_file == "y":
             with open(file_name, 'w') as csvfile:
