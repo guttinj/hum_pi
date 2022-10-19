@@ -15,7 +15,7 @@ date = 0
 
 n = input("Which Jar would you like to measure : ")
 
-def sense_forever(humidity, temp, date):#get humidity and temperature values
+def sense_forever(humidity, temp):#get humidity and temperature values
     count = 0
     # lst = []
     hum_list = []
@@ -44,7 +44,7 @@ def sense_forever(humidity, temp, date):#get humidity and temperature values
         # print(lst, count, len(lst))
         #make data accessible for later function1
 
-hum_list, temp_list = sense_forever(humidity, temp, date)
+hum_list, temp_list = sense_forever(humidity, temp)
 
 def get_avg(hum_list, temp_list):
     hum_avg = sum(hum_list) / len(hum_list)
@@ -71,7 +71,8 @@ def export_csv(n, hum_avg, temp_avg, cur_time):
             with open(file_name, 'w') as csvfile:
                 new_file = csv.writer(csvfile)
                 new_file.writerow(['Humidity ', ' Temp ', ' Date and Time'])
-            print("New file has been created. Please rerun the program using the new file")
+                new_file.writerow(final_data)
+            print(file_name + " has been created and is ready for use.")
         else:
             print("No file was created. Closing the program.")
 
