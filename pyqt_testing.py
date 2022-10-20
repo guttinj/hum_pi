@@ -1,11 +1,11 @@
-#import Adafruit_DHT
+import Adafruit_DHT
 import datetime, csv, time, os, sys, pathlib
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
-from PyQt5.QtGui import QIcon
-from PyQt5 import QtGui
+from PyQt5.QtWidgets import * #QApplication, QWidget, QPushButton
+from PyQt5.QtGui import * #QIcon
+from PyQt5 import * #QtGui
 
-# sen = Adafruit_DHT.DHT11
-# pin_Num = 4
+sen = Adafruit_DHT.DHT11
+pin_Num = 4
 humidity = 0
 temp = 0
 
@@ -18,10 +18,10 @@ def sense_forever(humidity, temp):#get humidity and temperature values
     while True:
         if count <= 4:
 
-            #humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
+            humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
             
-            humidity += 5
-            temp += 12
+            # humidity += 5
+            # temp += 12
 
             ##print('reading sensor ' , date) 
             time.sleep(1)
@@ -57,6 +57,9 @@ def export_csv(n, hum_avg, temp_avg, cur_time):
         print("File write complete")
 
     else:
+        def exit_program():
+            print("No file has been created. Closing the program.")
+
         def create_csv():
 
             #self.label.setText(f'You have created a new CSV file. ')
@@ -73,6 +76,12 @@ def export_csv(n, hum_avg, temp_avg, cur_time):
         button1.setText('Yes')
         button1.move(64, 32)
         button1.clicked.connect(create_csv)
+
+        button2 = QPushButton(widget)
+        button2.setText('No')
+        button2.move(128, 32)
+        button2.clicked.connect(exit_program)
+
 
         widget.setGeometry(50,50,720,200)
         widget.setWindowTitle("Selected file does not currently exist. Would you like to create new file Jar" + n + ".csv?")
