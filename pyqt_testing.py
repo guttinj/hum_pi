@@ -76,12 +76,13 @@ def export_csv(n, hum_avg, temp_avg, cur_time):
         button1.setText('Yes')
         button1.move(64, 32)
         button1.clicked.connect(create_csv)
-
+        button1.clicked.connect(QtCore.QCoreApplication.instance().quit) #closes the GUI on button click
+        
         button2 = QPushButton(widget)
         button2.setText('No')
         button2.move(128, 32)
         button2.clicked.connect(exit_program)
-
+        button2.clicked.connect(QtCore.QCoreApplication.instance().quit) #closes the GUI on button click
 
         widget.setGeometry(50,50,720,200)
         widget.setWindowTitle("Selected file does not currently exist. Would you like to create new file Jar" + n + ".csv?")
