@@ -1,13 +1,13 @@
 
-#import Adafruit_DHT
+import Adafruit_DHT
 import datetime, csv, time, os, sys, pathlib
 # from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
 # from PyQt5.QtGui import QIcon
 # from PyQt5 import QtGui, QtCore
 # import threading
 
-# sen = Adafruit_DHT.DHT11
-# pin_Num = 4
+sen = Adafruit_DHT.DHT11
+pin_Num = 4
 humidity = 0
 temp = 0
 
@@ -32,7 +32,7 @@ def get_jar_file():
 
 jar_file = get_jar_file()
 
-def sense_forever(humidity): #get humidity and temperature values
+def sense_forever(humidity, temp, jar_file): #get humidity and temperature values
 
     iteration = 0
     hum_list = []
@@ -42,25 +42,83 @@ def sense_forever(humidity): #get humidity and temperature values
 
         if len(hum_list)<4: #
 
-            #humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
+            humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
             
-            humidity += 5
+            #humidity += 5
             #temp += 12
 
             time.sleep(1)
             
             hum_list.append(humidity)
-            #temp_list.append(temp)
+            temp_list.append(temp)
             #count = count + 1
         else:
             hum_avg = sum(hum_list) / len(hum_list)
+            temp_avg = sum(temp_list) / len(temp_list)
             date = str(datetime.datetime.now())
-                       
+            final_data = [hum_avg, temp, date]
+
+            chosen_file = open(jar_file, 'a')
+            open_file = csv.writer(chosen_file)
+            open_file.writerow(final_data)
+            print("File write complete")
+          
             break
 
-    return(hum_list, hum_avg, date)
+    return(hum_avg, temp_avg, date)
 
-print(sense_forever(humidity))
+while True:
+    sense_forever(humidity, temp, jar_file)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #sensor = threading.Thread(target=sense_forever(humidity, temp))
 #sensor.daemon = True
 #sensor.start()
