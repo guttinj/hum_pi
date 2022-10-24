@@ -40,7 +40,7 @@ def sense_forever(humidity, temp, jar_file): #get humidity and temperature value
 
     while True:
 
-        if len(hum_list) < 600: 
+        if len(hum_list) < 3600: 
 
             humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
 
