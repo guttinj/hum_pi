@@ -40,18 +40,14 @@ def sense_forever(humidity, temp, jar_file): #get humidity and temperature value
 
     while True:
 
-        if len(hum_list)<4: #
+        if len(hum_list) < 600: 
 
             humidity, temp = Adafruit_DHT.read_retry(sen, pin_Num)
-            
-            #humidity += 5
-            #temp += 12
 
             time.sleep(1)
             
             hum_list.append(humidity)
             temp_list.append(temp)
-            #count = count + 1
         else:
             hum_avg = sum(hum_list) / len(hum_list)
             temp_avg = sum(temp_list) / len(temp_list)
